@@ -8,7 +8,7 @@ const statusBarHeight =
 
 function BasicHeader({title}) {
   return (
-    <View style={[styles.header, {height: statusBarHeight + 180}]}>
+    <View style={[styles.header, {height: statusBarHeight + 72}]}>
       {title !== undefined ? (
         <Text style={styles.title}>{title}</Text>
       ) : (
