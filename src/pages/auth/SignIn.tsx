@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import {colors} from '../../styles/colors.tsx';
 import axios, {AxiosError} from 'axios';
+import {API_BASE_URL} from '../../config/config.ts';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 function SignIn({navigation}: SignInScreenProps) {
@@ -49,9 +50,10 @@ function SignIn({navigation}: SignInScreenProps) {
 
     // 로딩 관리
     setLoading(true);
+
     // 로그인 요청
     try {
-      const response = await axios.post('/auth/login', {
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, {
         email,
         password,
       });
