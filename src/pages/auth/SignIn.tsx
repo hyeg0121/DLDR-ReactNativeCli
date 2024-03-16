@@ -12,16 +12,21 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Alert,
+  Pressable,
+  ActivityIndicator,
 } from 'react-native';
 import {colors} from '../../styles/colors.tsx';
+import axios, {AxiosError} from 'axios';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 function SignIn({navigation}: SignInScreenProps) {
+  const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const emailRef = useRef<TextInput | null>(null);
   const passwordRef = useRef<TextInput | null>(null);
+
   const handleRememberMe = () => {
     setRememberMe(!rememberMe);
   };
@@ -32,15 +37,36 @@ function SignIn({navigation}: SignInScreenProps) {
     setPassword(text.trim());
   }, []);
 
-  const onSubmit = useCallback(() => {
+  // 로그인
+  const onSubmit = useCallback(async () => {
+    // 빈칸 검사
     if (!email || !email.trim()) {
       return Alert.alert('Notification', 'Please enter the email.');
     }
     if (!password || !password.trim()) {
       return Alert.alert('Notification', 'Please enter the password.');
     }
-    Alert.alert('Notification', 'You have successfully logged in!');
-  }, [email, password]);
+
+    // 로딩 관리
+    setLoading(true);
+    // 로그인 요청
+    try {
+      const response = await axios.post('/auth/login', {
+        email,
+        password,
+      });
+
+      console.log(response.data);
+      Alert.alert('Notification', 'You have successfully logged in!');
+    } catch (error) {
+      const errorResponse = (error as AxiosError).response;
+      console.error(errorResponse);
+      Alert.alert('Notification', 'Login failed.');
+    } finally {
+      // 로딩 끝
+      setLoading(false);
+    }
+  }, [loading, email, password]);
 
   const toSignUp = useCallback(() => {
     navigation.navigate('SignUp');
@@ -99,9 +125,16 @@ function SignIn({navigation}: SignInScreenProps) {
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity style={styles.mainButton} onPress={onSubmit}>
-          <Text style={styles.mainButtonText}>Log in</Text>
-        </TouchableOpacity>
+        <Pressable
+          style={styles.mainButton}
+          onPress={onSubmit}
+          disabled={loading}>
+          {loading ? (
+            <ActivityIndicator color={colors.gray1} />
+          ) : (
+            <Text style={styles.mainButtonText}>Log in</Text>
+          )}
+        </Pressable>
         <TouchableOpacity style={styles.subButton} onPress={toSignUp}>
           <Text style={styles.subButtonText}>Sign up</Text>
         </TouchableOpacity>
