@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
-import MainSliderItem from './MainSliderItem.tsx';
-import {colors} from '../../styles/colors.tsx';
+import {colors} from '../../../styles/colors.tsx';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../store/reducer.ts';
+import RecentClassItem from './RecentClassSliderItem.tsx';
 
 interface ClassData {
   class: {
@@ -15,15 +17,17 @@ interface ClassData {
   };
 }
 
-const RecentClassSliderComponent: React.FC = () => {
+function RecentClassSliderComponent() {
   const [currentIndex, setCurrentIndex] = useState<number>(1); // 시작 인덱스를 1로 변경
   const [data, setData] = useState<ClassData[]>([]);
+
+  const {id} = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get<ClassData[]>(
-          'http://localhost:3000/users/1/watch_histories',
+          `http://localhost:3000/users/${id}/watch_histories`,
         );
         setData(response.data);
       } catch (error) {
@@ -71,7 +75,7 @@ const RecentClassSliderComponent: React.FC = () => {
         }}>
         {data.map((item, index) => (
           <TouchableOpacity key={index} onPress={() => handleCardPress(index)}>
-            <MainSliderItem
+            <RecentClassItem
               name={item.class.name}
               teacher={item.teacher.name}
               introduction={item.class.introduction}
@@ -86,7 +90,7 @@ const RecentClassSliderComponent: React.FC = () => {
       {renderPagination()}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

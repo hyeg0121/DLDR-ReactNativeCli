@@ -1,6 +1,8 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {colors} from '../../styles/colors.tsx';
+import {colors} from '../../../styles/colors.tsx';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../store/reducer.ts';
 
 interface Props {
   name: string;
@@ -9,12 +11,7 @@ interface Props {
   thumbnail: string;
 }
 
-const RecentClassItem: React.FC<Props> = ({
-  name,
-  teacher,
-  introduction,
-  thumbnail,
-}) => {
+function RecentClassItem({name, teacher, introduction, thumbnail}: Props) {
   const truncatedIntroduction =
     introduction.length > 50 ? `${introduction.slice(0, 50)}...` : introduction;
 
@@ -33,7 +30,7 @@ const RecentClassItem: React.FC<Props> = ({
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   card: {
