@@ -70,7 +70,7 @@ function SignIn({navigation}: SignInScreenProps) {
           id: response.data.id.toString(),
           name: response.data.name,
           email: response.data.email,
-          profileImage: response.data.profile_image,
+          profileImage: response.data.profile_img,
           userType: response.data.user_type,
         }),
       );
