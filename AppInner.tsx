@@ -11,7 +11,8 @@ import MyClasses from './src/pages/auth/student/MyClasses.tsx';
 import StudentChatting from './src/pages/auth/student/StudentChatting.tsx';
 import StudentSetting from './src/pages/auth/student/StudentSetting.tsx';
 import {Image} from 'react-native';
-import {colors} from 'react-native-elements';
+import {useSelector} from 'react-redux';
+import {RootState} from '@reduxjs/toolkit/query';
 
 // 로그인이 안 된 경우
 export type RootStackParamList = {
@@ -37,11 +38,12 @@ export type LoggedInTeacherParamList = {
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function AppInner() {
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [isStudent, setIsStudent] = useState(true);
+  const isLoggedIn = useSelector((state: RootState) => !!state.user.email);
+  const userType = useSelector((state: RootState) => state.user.userType);
+
   return (
     <NavigationContainer>
-      {isLoggedIn ? (
+      {!isLoggedIn ? (
         <Stack.Navigator>
           <Stack.Screen
             name="SignIn"
@@ -54,7 +56,7 @@ function AppInner() {
             options={{headerShown: false}}
           />
         </Stack.Navigator>
-      ) : isStudent ? (
+      ) : userType === 'student' ? (
         <Tab.Navigator>
           <Tab.Screen
             name="StudentHome"
