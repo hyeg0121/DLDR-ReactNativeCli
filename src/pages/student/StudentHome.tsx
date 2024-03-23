@@ -1,30 +1,31 @@
 import {Dimensions, ScrollView, StyleSheet, Text, View} from 'react-native';
-import BasicHeader from '../../../components/util/BasicHeader.tsx';
-import {colors} from '../../../styles/colors.tsx';
-import WeeklyStudyRecord from '../../../components/student/home/WeeklyStudyRecord.tsx';
-import MainSlider from '../../../components/slider/MainSlider.tsx';
-import SectionTitle from '../../../components/util/SectionTitle.tsx';
-import PopularClassesContainer from '../../../components/student/home/PopularClassesContainer.tsx';
+import BasicHeader from '../../components/util/BasicHeader.tsx';
+import {colors} from '../../styles/colors.tsx';
+import WeeklyStudyRecord from '../../components/student/home/WeeklyStudyRecord.tsx';
+import SectionTitle from '../../components/util/SectionTitle.tsx';
+import PopularClassesContainer from '../../components/student/home/PopularClassesContainer.tsx';
+import RecentClassesSlider from '../../components/student/home/RecentClassesSlider.tsx';
 
 const {width} = Dimensions.get('window');
 
-const radius: number = width / 2; // 가로 길이의 절반
 function StudentHome() {
   return (
-    <ScrollView style={styles.container}>
+    <>
       <BasicHeader title={null} />
-      <Text style={styles.welcomeTitle}>Welcome!</Text>
-      <Text style={styles.subTitle}>User's Weekly Study</Text>
-      {/*위클리*/}
-      <WeeklyStudyRecord />
-      <View style={styles.recentClassesSection}>
-        <SectionTitle title="Recent Classes" />
-        <MainSlider />
-        <View style={styles.marginHeight30} />
-        <SectionTitle title="Popular Classes" />
-        <PopularClassesContainer />
-      </View>
-    </ScrollView>
+      <ScrollView style={styles.container}>
+        <Text style={styles.welcomeTitle}>Welcome!</Text>
+        <Text style={styles.subTitle}>User's Weekly Study</Text>
+        {/*위클리*/}
+        <WeeklyStudyRecord />
+        <View style={styles.bottomSection}>
+          <SectionTitle title="Recent Classes" />
+          <RecentClassesSlider />
+          <View style={styles.marginHeight30} />
+          <SectionTitle title="Popular Classes" />
+          <PopularClassesContainer />
+        </View>
+      </ScrollView>
+    </>
   );
 }
 
@@ -56,7 +57,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     backgroundColor: colors.primary,
   },
-  recentClassesSection: {
+  bottomSection: {
+    paddingHorizontal: 18,
     marginTop: 30,
     paddingTop: 43,
     paddingBottom: 30,
