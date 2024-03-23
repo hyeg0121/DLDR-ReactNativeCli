@@ -1,4 +1,3 @@
-import {RootStackParamList} from '../../../App.tsx';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useState, useRef, useCallback} from 'react';
 import {
@@ -18,9 +17,14 @@ import {
 import {colors} from '../../styles/colors.tsx';
 import axios, {AxiosError} from 'axios';
 import {API_BASE_URL} from '../../config/config.ts';
+import {RootStackParamList} from '../../../AppInner.tsx';
+import userSlice from '../../slices/user';
+import {useAppDispatch} from '../../store';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 function SignIn({navigation}: SignInScreenProps) {
+  const dispatch = useAppDispatch();
+
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [email, setEmail] = useState('');
@@ -60,6 +64,16 @@ function SignIn({navigation}: SignInScreenProps) {
 
       console.log(response.data);
       Alert.alert('Notification', 'You have successfully logged in!');
+
+      dispatch(
+        userSlice.actions.setUser({
+          id: response.data.id.toString(),
+          name: response.data.name,
+          email: response.data.email,
+          profileImage: response.data.profile_image,
+          userType: response.data.user_type,
+        }),
+      );
     } catch (error) {
       const errorResponse = (error as AxiosError).response;
       console.error(errorResponse);
@@ -68,7 +82,7 @@ function SignIn({navigation}: SignInScreenProps) {
       // 로딩 끝
       setLoading(false);
     }
-  }, [loading, email, password]);
+  }, [email, password]);
 
   const toSignUp = useCallback(() => {
     navigation.navigate('SignUp');
