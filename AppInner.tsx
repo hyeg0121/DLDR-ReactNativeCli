@@ -4,12 +4,11 @@ import SignIn from './src/pages/auth/SignIn';
 import SignUp from './src/pages/auth/SignUp';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {useState} from 'react';
-import StudentHome from './src/pages/auth/student/StudentHome.tsx';
-import SearchClasses from './src/pages/auth/student/SearchClasses.tsx';
-import MyClasses from './src/pages/auth/student/MyClasses.tsx';
-import StudentChatting from './src/pages/auth/student/StudentChatting.tsx';
-import StudentSetting from './src/pages/auth/student/StudentSetting.tsx';
+import StudentHome from './src/pages/student/StudentHome.tsx';
+import SearchClasses from './src/pages/student/search/SearchClasses.tsx';
+import MyLectureListPage from './src/pages/student/myclasses/MyLectureListPage.tsx';
+import StudentChatting from './src/pages/student/chatroom/StudentChatting.tsx';
+import StudentSetting from './src/pages/student/setting/StudentSetting.tsx';
 import {Image} from 'react-native';
 import {useSelector} from 'react-redux';
 import {RootState} from '@reduxjs/toolkit/query';
@@ -92,7 +91,7 @@ function AppInner() {
           />
           <Tab.Screen
             name="MyClasses"
-            component={MyClasses}
+            component={MyLectureListPage}
             options={{
               tabBarShowLabel: false,
               headerShown: false,
