@@ -95,7 +95,6 @@ function RecentClassSliderComponent() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
-    paddingHorizontal: 18,
   },
   scrollViewContent: {
     alignItems: 'center',

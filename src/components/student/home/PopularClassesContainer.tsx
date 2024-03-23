@@ -57,7 +57,6 @@ function PopularClassesContainer() {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 18,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',

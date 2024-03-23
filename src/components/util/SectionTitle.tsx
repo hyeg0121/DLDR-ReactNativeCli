@@ -13,8 +13,8 @@ function SectionTitle(props: any) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 18,
     marginBottom: 20,
+    backgroundColor: colors.white,
   },
   title: {
     fontSize: 17,
