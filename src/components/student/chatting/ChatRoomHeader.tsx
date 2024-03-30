@@ -1,12 +1,24 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {colors} from '../../../styles/colors.tsx';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import {
+  Image,
+  Platform,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { colors } from '../../../styles/colors.tsx';
 
 interface Props {
   profileImg: string;
   teacherName: string;
   className: string;
 }
+
+const statusBarHeight =
+  Platform.OS === 'ios' ? getStatusBarHeight(true) : StatusBar.currentHeight;
 
 function ChatRoomHeader({profileImg, teacherName, className}: Props) {
   const navigation = useNavigation();
@@ -16,7 +28,7 @@ function ChatRoomHeader({profileImg, teacherName, className}: Props) {
   };
 
   return (
-    <View style={styles.header}>
+    <View style={[styles.header, {height: statusBarHeight + 102}]}>
       <TouchableOpacity onPress={toList}>
         <Image source={require('../../../assets/icons/back.png')} />
       </TouchableOpacity>
@@ -38,11 +50,12 @@ function ChatRoomHeader({profileImg, teacherName, className}: Props) {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: colors.primary,
-    flexDirection: 'row',
-    height: 118,
+    width: '100%',
     alignItems: 'flex-end',
     justifyContent: 'flex-start',
-    padding: 18,
+    paddingHorizontal: 18,
+    flexDirection: 'row',
+    paddingBottom: 18,
   },
   row: {
     flexDirection: 'row',
