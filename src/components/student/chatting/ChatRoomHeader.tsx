@@ -1,4 +1,5 @@
-import { useNavigation } from '@react-navigation/native';
+import React, {useCallback} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {
   Image,
   Platform,
@@ -8,8 +9,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { colors } from '../../../styles/colors.tsx';
+import {getStatusBarHeight} from 'react-native-status-bar-height';
+import {colors} from '../../../styles/colors.tsx';
 
 interface Props {
   profileImg: string;
@@ -23,13 +24,13 @@ const statusBarHeight =
 function ChatRoomHeader({profileImg, teacherName, className}: Props) {
   const navigation = useNavigation();
 
-  const toList = () => {
+  const goToList = useCallback(() => {
     navigation.navigate('ChatRoomList');
-  };
+  }, []);
 
   return (
     <View style={[styles.header, {height: statusBarHeight + 102}]}>
-      <TouchableOpacity onPress={toList}>
+      <TouchableOpacity onPress={goToList}>
         <Image source={require('../../../assets/icons/back.png')} />
       </TouchableOpacity>
       <View style={styles.row}>

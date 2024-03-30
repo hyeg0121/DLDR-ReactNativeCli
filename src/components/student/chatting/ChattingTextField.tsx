@@ -1,4 +1,4 @@
-import React, {useState, FC} from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   StyleSheet,
@@ -12,7 +12,7 @@ interface Props {
   onSendMessage: (message: string) => void;
 }
 
-const ChattingTextField: FC<Props> = ({onSendMessage}) => {
+function ChattingTextField({onSendMessage}: Props) {
   const [message, setMessage] = useState<string>('');
 
   const handleSend = () => {
@@ -44,7 +44,7 @@ const ChattingTextField: FC<Props> = ({onSendMessage}) => {
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

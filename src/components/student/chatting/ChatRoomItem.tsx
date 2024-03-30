@@ -22,14 +22,12 @@ function ChatRoomItem({
 }: Props) {
   const navigation = useNavigation();
 
-  const navigateToMChatRoom = useCallback(() => {
+  const goToChatRoom = useCallback(() => {
     navigation.navigate('ChatRoom', {id, profileImg, teacherName, className});
   }, []);
 
   return (
-    <TouchableOpacity
-      style={styles.chatRoomContainer}
-      onPress={navigateToMChatRoom}>
+    <TouchableOpacity style={styles.chatRoomContainer} onPress={goToChatRoom}>
       <View style={styles.leftContainer}>
         <View style={styles.thumbnailWrap}>
           <Image
