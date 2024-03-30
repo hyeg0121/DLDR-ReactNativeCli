@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React, {useCallback} from 'react';
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {colors} from '../../../styles/colors.tsx';
 
@@ -22,7 +22,7 @@ function ChatRoomItem({
 }: Props) {
   const navigation = useNavigation();
 
-  const navigateToMChatRoom = useEffect(() => {
+  const navigateToMChatRoom = useCallback(() => {
     navigation.navigate('ChatRoom', {id, profileImg, teacherName, className});
   }, []);
 
