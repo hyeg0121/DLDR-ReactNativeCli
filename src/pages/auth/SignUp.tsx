@@ -1,23 +1,37 @@
-import {RootStackParamList} from '../../../App.tsx';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useState, useRef, useCallback} from 'react';
 import {
-  StatusBar,
   StyleSheet,
   Text,
   TextInput,
   View,
   TouchableOpacity,
   Image,
-  Keyboard,
-  TouchableWithoutFeedback,
-  Alert,
 } from 'react-native';
 import {colors} from '../../styles/colors.tsx';
 import BasicHeader from '../../components/util/BasicHeader.tsx';
 import DissmissKeyboardView from '../../components/util/DissmissKeyboardView.tsx';
 
 function SignUp() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [checkPassword, setCheckPassword] = useState('');
+
+  const emailRef = useRef<TextInput | null>(null);
+  const passwordRef = useRef<TextInput | null>(null);
+  const checkPasswordRef = useRef<TextInput | null>(null);
+
+  const onChangeEmail = useCallback(text => {
+    setEmail(text.trim());
+  }, []);
+
+  const onChangePassword = useCallback(text => {
+    setPassword(text.trim());
+  }, []);
+
+  const onChangeCheckPassword = useCallback(text => {
+    setCheckPassword(text.trim());
+  }, []);
+
   return (
     <DissmissKeyboardView>
       <View style={styles.container}>
@@ -34,7 +48,19 @@ function SignUp() {
         <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}>E-mail</Text>
           <View style={styles.inputWrap}>
-            <TextInput style={styles.textInput} />
+            <TextInput
+              style={styles.textInput}
+              value={email}
+              onChangeText={onChangeEmail}
+              importantForAutofill="yes" // 페이스 아이디 사용
+              autoComplete="email"
+              textContentType="emailAddress"
+              returnKeyType="next"
+              clearButtonMode="while-editing"
+              ref={emailRef}
+              onSubmitEditing={() => passwordRef.current?.focus()}
+              blurOnSubmit={false}
+            />
             <TouchableOpacity>
               <Image source={require('../../assets/icons/x_icon.png')} />
             </TouchableOpacity>
@@ -43,7 +69,17 @@ function SignUp() {
         <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}>Password</Text>
           <View style={styles.inputWrap}>
-            <TextInput style={styles.textInput} />
+            <TextInput
+              style={styles.textInput}
+              onChangeText={onChangePassword}
+              value={password}
+              importantForAutofill="no"
+              secureTextEntry
+              textContentType="password"
+              ref={passwordRef}
+              onSubmitEditing={() => checkPasswordRef.current?.focus()}
+              blurOnSubmit={false}
+            />
             <TouchableOpacity>
               <Image source={require('../../assets/icons/eye.png')} />
             </TouchableOpacity>
@@ -52,7 +88,16 @@ function SignUp() {
         <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}>Confirm Password</Text>
           <View style={styles.inputWrap}>
-            <TextInput style={styles.textInput} />
+            <TextInput
+              style={styles.textInput}
+              onChangeText={onChangeCheckPassword}
+              value={checkPassword}
+              importantForAutofill="no"
+              secureTextEntry
+              autoComplete="password"
+              textContentType="password"
+              ref={checkPasswordRef}
+            />
             <TouchableOpacity>
               <Image source={require('../../assets/icons/eye.png')} />
             </TouchableOpacity>
