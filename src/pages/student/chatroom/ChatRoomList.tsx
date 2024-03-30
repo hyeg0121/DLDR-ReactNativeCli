@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../../store/reducer.ts';
 import BasicHeader from '../../../components/util/BasicHeader.tsx';
 import ChatRoomItem from '../../../components/student/chatting/ChatRoomItem.tsx';
+import {colors} from '../../../styles/colors.tsx';
 
 interface ChatRoom {
   id: number;
@@ -67,7 +68,9 @@ function ChatRoomList() {
 }
 
 const styles = StyleSheet.create({
-  listContainer: {},
+  listContainer: {
+    backgroundColor: colors.white,
+  },
 });
 
 export default ChatRoomList;
