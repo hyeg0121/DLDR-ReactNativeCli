@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {colors} from '../../../styles/colors.tsx';
@@ -11,20 +11,19 @@ interface MyClassItemProps {
   introduction: string;
 }
 
-const MyLectureItem: React.FC<MyClassItemProps> = ({
-  id,
-  thumbnail,
-  name,
-  teacher,
-  introduction,
-}) => {
+function MyLectureItem({id, thumbnail, name, teacher, introduction}) {
+  const navigation = useNavigation();
   const truncatedIntroduction =
     introduction.length > 55
       ? `${introduction.substring(0, 55)}...`
       : introduction;
 
+  const toLectureDetail = useCallback(() => {
+    navigation.navigate('MyLecture', {id});
+  }, [navigation]);
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={toLectureDetail}>
       <View style={styles.classContainer}>
         <View style={styles.thumbnailWrap}>
           <Image
@@ -46,7 +45,7 @@ const MyLectureItem: React.FC<MyClassItemProps> = ({
       </View>
     </TouchableOpacity>
   );
-};
+}
 
 const styles = StyleSheet.create({
   thumbnailWrap: {
