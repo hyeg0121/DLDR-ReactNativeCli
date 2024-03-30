@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {colors} from '../../../styles/colors.tsx';
 
@@ -22,9 +22,9 @@ function ChatRoomItem({
 }: Props) {
   const navigation = useNavigation();
 
-  const navigateToMChatRoom = () => {
-    navigation.navigate('ChatRoom', {id});
-  };
+  const navigateToMChatRoom = useEffect(() => {
+    navigation.navigate('ChatRoom', {id, profileImg, teacherName, className});
+  }, []);
 
   return (
     <TouchableOpacity
