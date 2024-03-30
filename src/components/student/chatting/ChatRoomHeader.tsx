@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     height: 34,
     position: 'relative',
     overflow: 'hidden',
-    borderRadius: '50%',
+    borderRadius: 50,
     marginHorizontal: 16,
   },
   profileImg: {
