@@ -77,6 +77,7 @@ function SubjectSlider() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
+    marginBottom: 20,
   },
   scrollViewContent: {
     alignItems: 'center',
