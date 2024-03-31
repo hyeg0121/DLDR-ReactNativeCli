@@ -1,8 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {colors} from '../../../styles/colors.tsx';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../../store/reducer.ts';
 
 interface Props {
   name: string;
@@ -23,7 +21,7 @@ function RecentClassItem({name, teacher, introduction, thumbnail}: Props) {
           style={styles.image}
         />
       </View>
-      <View style={styles.textInfo}>
+      <View>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.teacher}>{teacher}</Text>
         <Text style={styles.introduction}>{truncatedIntroduction}</Text>
