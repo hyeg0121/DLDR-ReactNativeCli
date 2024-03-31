@@ -3,6 +3,8 @@ import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, TouchableOpacity, Text, Image} from 'react-native';
 import PopularClassItem from './PopularClassItem.tsx';
 import {colors} from '../../../styles/colors.tsx';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../store/reducer.ts';
 
 interface ClassData {
   name: string;
@@ -13,12 +15,12 @@ interface ClassData {
 
 function PopularClassesContainer() {
   const [classesData, setClassesData] = useState<ClassData[]>([]);
-
+  const userId = useSelector((state: RootState) => state.user.id);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get<ClassData[]>(
-          'http://localhost:3000/classes',
+          `http://localhost:3000/classes?user_id=${userId}`,
         );
         setClassesData(response.data);
       } catch (error) {
