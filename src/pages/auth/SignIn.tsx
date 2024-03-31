@@ -85,7 +85,7 @@ function SignIn({navigation}: SignInScreenProps) {
   }, [email, password]);
 
   const toSignUp = useCallback(() => {
-    navigation.navigate('SignUp');
+    navigation.navigate('ChooseUserType');
   }, [navigation]);
 
   return (
