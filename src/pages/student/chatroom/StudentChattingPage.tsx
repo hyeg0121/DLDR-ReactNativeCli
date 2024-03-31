@@ -10,7 +10,7 @@ export type StudentChattingParamList = {
   ChatRoom: undefined;
 };
 
-function StudentChatting() {
+function StudentChattingPage() {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -26,4 +26,4 @@ function StudentChatting() {
     </Stack.Navigator>
   );
 }
-export default StudentChatting;
+export default StudentChattingPage;
