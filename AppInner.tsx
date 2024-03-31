@@ -5,18 +5,24 @@ import SignUp from './src/pages/auth/SignUp';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import StudentHome from './src/pages/student/StudentHome.tsx';
-import SearchClasses from './src/pages/student/search/SearchClasses.tsx';
+import SearchPage from './src/pages/student/search/SearchPage.tsx';
 import MyLectureListPage from './src/pages/student/myclasses/MyLectureListPage.tsx';
-import StudentChatting from './src/pages/student/chatroom/StudentChatting.tsx';
-import StudentSetting from './src/pages/student/setting/StudentSetting.tsx';
+import StudentChattingPage from './src/pages/student/chatroom/StudentChattingPage.tsx';
+import StudentSettingPage from './src/pages/student/setting/StudentSettingPage.tsx';
 import {Image} from 'react-native';
 import {useSelector} from 'react-redux';
 import {RootState} from '@reduxjs/toolkit/query';
+import ChooseUserType from './src/pages/auth/ChooseUserType.tsx';
+import VerifyCode from './src/pages/auth/VerifyCode.tsx';
+import VerifyLocation from './src/pages/auth/VerifyLocation.tsx';
 
 // 로그인이 안 된 경우
 export type RootStackParamList = {
   SignIn: undefined;
   SignUp: undefined;
+  ChooseUserType: undefined;
+  VerifyCode: undefined;
+  VerifyLocation: undefined;
 };
 
 export type LoggedInStudentParamList = {
@@ -54,6 +60,21 @@ function AppInner() {
             component={SignUp}
             options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="ChooseUserType"
+            component={ChooseUserType}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="VerifyCode"
+            component={VerifyCode}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="VerifyLocation"
+            component={VerifyLocation}
+            options={{headerShown: false}}
+          />
         </Stack.Navigator>
       ) : userType === 'student' ? (
         <Tab.Navigator>
@@ -63,7 +84,7 @@ function AppInner() {
             options={{
               tabBarShowLabel: false,
               headerShown: false,
-              tabBarIcon: ({focused, color}) => (
+              tabBarIcon: ({focused}) => (
                 <Image
                   source={require('./src/assets/tabbar/home.png')}
                   style={{width: 21, height: 21}}
@@ -75,11 +96,11 @@ function AppInner() {
           />
           <Tab.Screen
             name="SearchClasses"
-            component={SearchClasses}
+            component={SearchPage}
             options={{
               tabBarShowLabel: false,
               headerShown: false,
-              tabBarIcon: ({focused, color}) => (
+              tabBarIcon: ({focused}) => (
                 <Image
                   source={require('./src/assets/tabbar/search.png')}
                   style={{width: 21, height: 21}}
@@ -95,7 +116,7 @@ function AppInner() {
             options={{
               tabBarShowLabel: false,
               headerShown: false,
-              tabBarIcon: ({focused, color}) => (
+              tabBarIcon: ({focused}) => (
                 <Image
                   source={require('./src/assets/tabbar/classes.png')}
                   style={{width: 21, height: 21}}
@@ -107,11 +128,11 @@ function AppInner() {
           />
           <Tab.Screen
             name="StudentChatting"
-            component={StudentChatting}
+            component={StudentChattingPage}
             options={{
               tabBarShowLabel: false,
               headerShown: false,
-              tabBarIcon: ({focused, color}) => (
+              tabBarIcon: ({focused}) => (
                 <Image
                   source={require('./src/assets/tabbar/chatting.png')}
                   style={{width: 21, height: 21}}
@@ -123,7 +144,7 @@ function AppInner() {
           />
           <Tab.Screen
             name="StudentSetting"
-            component={StudentSetting}
+            component={StudentSettingPage}
             options={{
               tabBarShowLabel: false,
               headerShown: false,
