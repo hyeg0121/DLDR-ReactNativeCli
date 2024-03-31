@@ -5,7 +5,7 @@ import BasicHeader from '../../../components/util/BasicHeader.tsx';
 import UserProfile from '../../../components/student/setting/UserProfile.tsx';
 import SettingMenuItem from '../../../components/student/setting/SettingMenuItem.tsx';
 
-function StudentSetting() {
+function StudentSettingPage() {
   return (
     <View style={styles.container}>
       <BasicHeader title="Profile" />
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StudentSetting;
+export default StudentSettingPage;
