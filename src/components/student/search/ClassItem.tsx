@@ -19,12 +19,12 @@ function ClassListItemComponent({
   teacher,
   isFavorite,
 }: Props) {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const [isHearted, setIsHearted] = useState<boolean>(false);
 
   const handlePress = () => {
-    // navigation.navigate('ClassInfo', {id});
+    navigation.navigate('ClassDetail', {id});
   };
 
   const toggleHeart = () => {
