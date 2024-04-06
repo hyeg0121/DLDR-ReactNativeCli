@@ -1,9 +1,7 @@
 import {View, Text, StyleSheet} from 'react-native';
 import {colors} from '../../styles/colors.tsx';
 
-function SectionTitle(props: any) {
-  const {title} = props;
-
+function SectionTitle({title}: any) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
