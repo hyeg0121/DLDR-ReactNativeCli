@@ -11,34 +11,26 @@ import {
 import BasicHeader from '../../components/util/BasicHeader.tsx';
 import {colors} from '../../styles/colors.tsx';
 import SectionTitle from '../../components/util/SectionTitle.tsx';
-import PopularClassesContainer from '../../components/student/home/PopularClassesContainer.tsx';
 import Modal from 'react-native-modal';
+import TeachersAllClassesContainer from '../../components/teacher/home/TeachersAllClassesContainer.tsx';
+import TeacherProfileContainer from '../../components/teacher/home/TeacherProfileContainer.tsx';
+import ModalContainer from '../../components/teacher/home/ModalContainer.tsx';
 
 const {width} = Dimensions.get('window');
 
 function TeacherHome() {
-  const [isModalVisible, setModalVisible] = useState(false);
-
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
-
   return (
     <>
       <BasicHeader title={null} />
       <ScrollView style={styles.container}>
         <Text style={styles.welcomeTitle}>Welcome!</Text>
+        <TeacherProfileContainer />
         <View style={styles.bottomSection}>
           <SectionTitle title="My Classes" />
-          <PopularClassesContainer />
+          <TeachersAllClassesContainer />
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.floatingButton} onPress={toggleModal}>
-        <Image source={require('../../assets/icons/book.png')} />
-      </TouchableOpacity>
-      <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
-        <View style={styles.modalContent}>{/* 모달 내용 */}</View>
-      </Modal>
+      <ModalContainer />
     </>
   );
 }
@@ -72,6 +64,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
   },
   bottomSection: {
+    height: '100%',
     paddingHorizontal: 18,
     marginTop: 30,
     paddingTop: 43,
