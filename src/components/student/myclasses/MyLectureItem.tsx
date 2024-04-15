@@ -11,7 +11,13 @@ interface MyClassItemProps {
   introduction: string;
 }
 
-function MyLectureItem({id, thumbnail, name, teacher, introduction}) {
+function MyLectureItem({
+  id,
+  thumbnail,
+  name,
+  teacher,
+  introduction,
+}: MyClassItemProps) {
   const navigation = useNavigation();
   const truncatedIntroduction =
     introduction.length > 55
@@ -19,7 +25,7 @@ function MyLectureItem({id, thumbnail, name, teacher, introduction}) {
       : introduction;
 
   const toLectureDetail = useCallback(() => {
-    navigation.navigate('MyLecture', {id});
+    navigation.navigate('MyLecture', {id, name});
   }, [navigation]);
 
   return (
