@@ -15,6 +15,7 @@ import {RootState} from '@reduxjs/toolkit/query';
 import ChooseUserType from './src/pages/auth/ChooseUserType.tsx';
 import VerifyCode from './src/pages/auth/VerifyCode.tsx';
 import VerifyLocation from './src/pages/auth/VerifyLocation.tsx';
+import TeacherHome from './src/pages/teacher/TeacherHome.tsx';
 
 // 로그인이 안 된 경우
 export type RootStackParamList = {
@@ -161,7 +162,22 @@ function AppInner() {
         </Tab.Navigator>
       ) : (
         <Tab.Navigator>
-          <Tab.Screen name="StudentHome" component={StudentHome} />
+          <Tab.Screen
+            name="TeacherHome"
+            component={TeacherHome}
+            options={{
+              tabBarShowLabel: false,
+              headerShown: false,
+              tabBarIcon: ({focused}) => (
+                <Image
+                  source={require('./src/assets/tabbar/home.png')}
+                  style={{width: 21, height: 21}}
+                  resizeMode="contain"
+                  tintColor={focused ? '#1638D8' : '#B0BCF3'}
+                />
+              ),
+            }}
+          />
         </Tab.Navigator>
       )}
     </NavigationContainer>
